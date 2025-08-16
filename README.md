@@ -54,14 +54,23 @@ This repository serves as both a demonstration and the companion code for my det
 2. Attach `AWSCodeDeployRole` policy
 3. Update trust relationship with provided policy
 
-### 2. EC2 Instance Setup
+### 2. Launch Template and ASG setup
 
-1. Launch Ubuntu EC2 instance
+1. Use Ubuntu EC2 instance for LT
 2. Configure security group (SSH: Port 22, HTTP: Port 80)
-3. Attach `EC2CodeDeployRole`
+3. Attach EC2CodeDeployRole
 4. Add CodeDeploy agent installation script to user data
+5. Create autoscaling group from the launch template
 
-### 3. CodeDeploy Configuration
+
+### 3. CodeBuild Configuration
+
+1. Create CodeBuild Project
+2. Add source - Github
+3. Add Artifact - S3 ( create s3 bucket)
+
+
+### 4. CodeDeploy Configuration
 
 1. Create CodeDeploy application
 2. Set up deployment group
@@ -72,10 +81,27 @@ This repository serves as both a demonstration and the companion code for my det
 
 1. Create new pipeline
 2. Configure GitHub source connection
-3. Set up CodeBuild project
+3. Select CodeBuild project
 4. Link CodeDeploy deployment
 
 ## Configuration Files
+
+### UserData
+```bash
+# Update system
+sudo apt update -y
+
+# Install CodeDeploy Agent
+sudo apt install ruby-full -y
+cd /home/ubuntu
+wget https://aws-codedeploy-us-east-2.s3.us-east-2.amazonaws.com/latest/install
+chmod +x ./install
+sudo ./install auto
+
+sudo systemctl enable codedeploy-agent
+sudo systemctl start codedeploy-agent
+```
+
 
 ### buildspec.yml
 ```yaml
@@ -125,18 +151,4 @@ hooks:
       runas: root
 ```
 
-## Troubleshooting
-
-- **CodeDeploy Agent Issues:** Check agent status with `sudo service codedeploy-agent status`
-- **Pipeline Failures:** Review CloudWatch logs for detailed error messages
-- **EC2 Connectivity:** Ensure security groups allow necessary traffic
-- **Build Failures:** Verify buildspec.yml paths and commands
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 # react-deploy
