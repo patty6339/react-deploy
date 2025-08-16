@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+        - cd ./app
+        - npm install
+       
+  build:
+    commands:
+        - npm run build
+     
+artifacts:
+  files:
+    - 'app/dist/**/*'
+    - 'appspec.yml'
+    - 'scripts/**/*'
+  discard-paths: no
+  type: zip
+  name: 'app.zip'
