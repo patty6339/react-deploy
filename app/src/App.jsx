@@ -36,7 +36,7 @@ function App() {
           </div>
 
           <p>
-            Simple demonstration of AWS CI/CD pipeline using AWS codepipeline, AWS codebuild, AWS codedeploy, S3 & Vite + React.
+              Hands-on demo successfuly completed following directions from previous class.
           </p>
           </div>
         
