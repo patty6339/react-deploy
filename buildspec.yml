@@ -18,5 +18,4 @@ artifacts:
     - 'appspec.yml'
     - 'scripts/**/*'
   discard-paths: no
-  type: zip
   name: 'app.zip'
