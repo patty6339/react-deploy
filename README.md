@@ -8,7 +8,7 @@ You can follow along with the blog post for step-by-step instructions or use thi
 
 ## Architecture  
 
-![cloud architecture](AWS CodePipeline (1).jpg)  
+![cloud architecture](images/cloud_architecture.jpg)) 
 
 ---
 
